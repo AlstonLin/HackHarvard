@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "uplinks": {
+    "coil": {
+      "relation": "parent",
+      "plugin": "/code/node_modules/ilp-plugin-btp-coil/index.js",
+      "assetCode": "USD",
+      "assetScale": 9,
+      "sendRoutes": false,
+      "receiveRoutes": false,
+      "options": {
+        "assetScale": 9,
+        "coilToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjam5oNjd0aTY1em56MDgxMWg2ZGEwajE0IiwidGhyb3VnaHB1dCI6MTAwMDAwLCJjdXJyZW5jeSI6IlVTRCIsInNjYWxlIjo5LCJpYXQiOjE1NDAwNjU3MzYsImV4cCI6MTU0MDMyNDkzNn0.mSzBE-ooS_HuRYNHv2dReAe0HtVKJEp4CtDoDNAxZoc",
+        "server": "btp+wss://coil.com/btp"
+      }
+    }
+  }
+}

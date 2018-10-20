@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "moneyd coil:start --config /code/.moneyd.json & node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +20,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "moneyd": "^4.3.0",
+    "moneyd-uplink-coil": "^1.0.1",
     "mongoose": "^5.3.4"
   }
 }
