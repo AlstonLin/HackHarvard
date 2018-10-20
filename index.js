@@ -1,5 +1,6 @@
 const express = require('express'),
-  util = require('util');
+  util = require('util'),
+  path = require('path'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
   File = require('./models/file'),
@@ -9,6 +10,9 @@ const express = require('express'),
 
 app.use(bodyParser.json());
 
+/**
+ * API
+ */
 app.post('/api/file', async (req, res) => {
   const newFile = new File({
     _id: req.body.id,
@@ -51,5 +55,16 @@ app.post('/api/user', async (req, res) => {
   await util.promisify(newUser.save.bind(newUser))();
   res.status(204).end();
 });
+
+/**
+ * PUBLIC
+ */
+app.get('/player', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/player.html'));
+});
+app.get('/upload', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/upload.html'));
+});
+
 mongoose.connect('mongodb://db:27017/hackharvard');
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
