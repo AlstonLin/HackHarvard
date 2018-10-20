@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Play Song</title>
+    <script>
+      var buyFile = function(userId, fileId, cb){
+        $.ajax({
+          url: '/api/file/' + fileId + '/buy',
+          data: JSON.stringify({
+            user: userId,
+          }),
+          contentType: 'application/json',
+          dataType: 'json',
+          type: 'POST',
+          success: function(data){
+            cb();
+          }
+        });
+      };
+      var downloadFile = function(userId, fileId, cb){
+        $.ajax({
+          url: '/api/file/' + fileId + '/download',
+          data: JSON.stringify({
+            user: userId,
+          }),
+          contentType: 'application/json',
+          dataType: 'json',
+          type: 'POST',
+          success: function(data){
+            console.log(data);
+            cb(data.path);
+          }
+        });
+      };
+      var showPlayer = function(path){
+        $('#container').html('<audio controls><source src="' + path + '" type="audio/mpeg"></audio>');
+      };
+      $(document).ready(function(){
+        var userId = 'bar', fileId = 'foo'; // TODO: Pass in real values from Wix
+        buyFile(userId, fileId, function(){
+          downloadFile(userId, fileId, function(path){
+            showPlayer(path);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Play Song</h1>
+    <div id="container"></div>
+  </body>
+</html>

@@ -10,6 +10,9 @@ const mongoose = require('mongoose'),
     costCents: {
       type: Number,
     },
+    filename: {
+      type: String,
+    },
     downloaders: [{
       type : String,
       ref : 'User'

@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Upload Song</title>
+  </head>
+  <body>
+    <h1>Upload your song</h1>
+    <form action="/api/file" method="post" enctype="multipart/form-data">
+      <input type="file" name="content"/><br/>
+      ID: <input type="text" name="id"><br/>
+      ownerId: <input type="text" name="ownerId"><br/>
+      Cents: <input type="number" name="costCents"><br/>
+      <input type="submit" />
+    </form>
+  </body>
+</html>

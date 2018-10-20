@@ -22,6 +22,7 @@
     "express": "^4.16.4",
     "moneyd": "^4.3.0",
     "moneyd-uplink-coil": "^1.0.1",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "multer": "^1.4.1"
   }
 }

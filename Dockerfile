@@ -1,6 +1,6 @@
 FROM node:8.11.3-alpine
 ENV NODE_ENV production
-RUN mkdir -p /code
+RUN mkdir -p /code /uploads
 WORKDIR /code
 COPY package.json /code/package.json
 COPY package-lock.json /code/package-lock.json
