@@ -13,6 +13,15 @@ const mongoose = require('mongoose'),
     filename: {
       type: String,
     },
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    artist: {
+      type: String,
+    },
     downloaders: [{
       type : String,
       ref : 'User'
