@@ -20,6 +20,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "get-port": "^4.0.0",
+    "ilp-plugin": "^3.2.1",
+    "ilp-protocol-psk2": "^0.5.0",
+    "ilp-protocol-stream": "^1.8.4",
+    "koa": "^2.5.3",
+    "localtunnel": "^1.9.1",
     "moneyd": "^4.3.0",
     "moneyd-uplink-coil": "^1.0.1",
     "mongoose": "^5.3.4",

@@ -6,7 +6,8 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   File = require('./models/file'),
   User = require('./models/user'),
-  upload = multer({ dest: '/uploads' });
+  upload = multer({ dest: '/uploads' }),
+  receiver = require('./receiver'),
   app = express(),
   PORT = process.env.PORT || 3000;
 
