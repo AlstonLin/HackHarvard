@@ -44,7 +44,6 @@ async function run () {
       stream.setReceiveMax(10000000000000)
       stream.on('money', amount => {
         console.log(`got money: ${amount} on stream ${stream.id}`);
-        console.log({...stream});
       })
     })
   })

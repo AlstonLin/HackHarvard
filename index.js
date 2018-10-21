@@ -14,7 +14,6 @@ const express = require('express'),
 
 app.use(bodyParser.json());
 
-
 /**
  * API
  */

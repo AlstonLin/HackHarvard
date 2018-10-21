@@ -4,7 +4,7 @@ const debug = require('debug')('ilp-spsp')
 
 // recipient is the payment pointer
 // amount is 1 XRP = 10^9 units
-export default async function pay (recipient, amount) {
+module.exports.pay = async (recipient, amount) => {
   try {
     const plugin = ilp.createPlugin()
     debug('connecting plugin')

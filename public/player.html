@@ -1,8 +1,13 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://polyfill.webmonetization.org/polyfill.js"></script>
+    <script src="https://cdn.coil.com/donate.js"></script>
     <title>Play Song</title>
     <script>
+      window.WebMonetizationScripts.donate({
+        paymentPointer: '$beatblox.localtunnel.me'
+      })
       var buyFile = function(userId, fileId, cb){
         $.ajax({
           url: '/api/file/' + fileId + '/buy',
