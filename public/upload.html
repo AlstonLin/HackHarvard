@@ -1,19 +1,146 @@
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>Upload Song</title>
-  </head>
-  <body>
-    <h1>Upload your song</h1>
-    <form action="/api/file" method="post" enctype="multipart/form-data">
-      <input type="file" name="content"/><br/>
-      ID: <input type="text" name="id"><br/>
-      ownerId: <input type="text" name="ownerId"><br/>
-      Cents: <input type="number" name="costCents"><br/>
-      Title: <input type="text" name="title"><br/>
-      Description: <input type="text" name="description"><br/>
-      Artist: <input type="text" name="artist"><br/>
-      <input type="submit" />
-    </form>
-  </body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Upload Song</title>
+        <style>
+            .title {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 30px;
+            }
+
+            input[type=text], input[type=number]{
+                padding: 9px; 
+                margin: 10px;
+                border: solid 1px #E5E5E5; 
+                outline: 0; 
+                font: normal 13px/100% Verdana, Tahoma, sans-serif; 
+                width: 200px; 
+                background: #FFFFFF;
+                box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+            }
+            
+            input:hover, textarea:hover, 
+            input:focus, textarea:focus { 
+                border-color: #C9C9C9; 
+            }
+
+            form {
+                margin-bottom: 0;
+            }
+
+            .formLine {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                display: flex;
+                align-items: center;
+            }
+            
+            .wrapper {
+                padding: 20px;
+            }
+            
+            .submit {
+                background-color:#44c767;
+                border: 0px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                display: inline;
+                color:#ffffff;
+                padding: 10px;
+            }
+
+            .submit:hover {
+                background-color:#5cbf2a;
+            }
+
+            .inputLabel {
+                width: 100px;
+            }
+
+            .file_input_textbox {
+                height: 25px;
+                width: 200px;
+                float: left;
+            }
+            .file_input_div {
+                position: relative;
+                width: 80px;
+                height: 26px;
+                overflow: hidden;
+            }
+            .file_input_button {
+                width: 80px;
+                position: absolute;
+                top: 0px;
+                border: 1px solid #F0F0EE;
+                padding: 2px 8px 2px 8px;
+                font-weight: bold;
+                height: 25px;
+                margin: 0px;
+                margin-right: 5px;
+            }
+            .file_input_button_hover {
+                width: 80px;
+                position: absolute;
+                top: 0px;
+                background-color: #B2BBD0;
+                border: 0px;
+                padding: 2px 8px 2px 8px;
+                height: 25px;
+                margin: 0px;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+            .file_input_hidden {
+                font-size: 45px;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                -ms-filter: "alpha(opacity=0)";
+                -khtml-opacity: 0;
+                -moz-opacity: 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="title">Upload your Song</div>
+            <form action="/api/file" method="post" enctype="multipart/form-data">
+                <div class="formLine">
+                    <input type="text" id="fileName" class="file_input_textbox" readonly="readonly">
+                    <div class="file_input_div">
+                        <input id="fileInputButton" type="button" value="Browse" class="file_input_button" />
+                        <input type="file" class="file_input_hidden" 
+                            onchange="document.getElementById('fileName').value = this.value" 
+                            onmouseover="document.getElementById('fileInputButton').className = 'file_input_button_hover';" onmouseout="document.getElementById('fileInputButton').className = 'file_input_button';" />
+                    </div>
+                </div>
+                <div style="display: none">
+                    ID: <input type="text" name="id">
+                </div>
+                <div style="display: none">
+                    ownerId: <input type="text" name="ownerId"><br/>
+                </div>
+                <div class="formLine">
+                    <div class="inputLabel">Title</div>
+                    <input type="text" name="title"><br/>
+                </div>
+                <div class="formLine">
+                    <div class="inputLabel">Description</div>
+                    <input type="text" name="description"><br/>
+                </div>
+                <div class="formLine">
+                    <div class="inputLabel">Artist</div>
+                    <input type="text" name="artist"><br/>
+                </div>
+                <div class="formLine">
+                    <div class="inputLabel">Cents</div>
+                    <input type="number" name="costCents"><br/>
+                </div>
+                <input type="submit" class="submit" />
+            </form>
+        </div>
+    </body>
 </html>
