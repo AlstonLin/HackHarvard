@@ -43,7 +43,8 @@ async function run () {
     connection.on('stream', stream => {
       stream.setReceiveMax(10000000000000)
       stream.on('money', amount => {
-        console.log('got packet for', amount, 'units')
+        console.log(`got money: ${amount} on stream ${stream.id}`);
+        console.log({...stream});
       })
     })
   })

@@ -8,6 +8,7 @@ const express = require('express'),
   User = require('./models/user'),
   upload = multer({ dest: '/uploads' }),
   receiver = require('./receiver'),
+  payment = require('./payment'),
   app = express(),
   PORT = process.env.PORT || 3000;
 
