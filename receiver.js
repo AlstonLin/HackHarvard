@@ -9,23 +9,7 @@ const Koa = require('koa')
 const app = new Koa()
 const crypto = require('crypto')
 
-const argv = require('yargs')
-  .option('subdomain', {
-    default: 'beatblox',
-    description: 'subdomain for localtunnel'
-  })
-  .option('localtunnel', {
-    default: true,
-    type: 'boolean',
-    description: 'use localtunnel'
-  })
-  .option('port', {
-    description: 'port to listen locally'
-  })
-  .help('help')
-  .argv
-
-async function run () {
+async function runReceiver (f) {
   console.log('connecting...')
   const pskPlugin = makePlugin()
   const streamPlugin = makePlugin()
@@ -33,7 +17,7 @@ async function run () {
   await streamPlugin.connect()
   await pskPlugin.connect()
 
-  const port = argv.port || await getPort()
+  const port = await getPort()
   const streamServer = new Server({
     plugin: streamPlugin,
     serverSecret: crypto.randomBytes(32)
@@ -42,9 +26,7 @@ async function run () {
   streamServer.on('connection', connection => {
     connection.on('stream', stream => {
       stream.setReceiveMax(10000000000000)
-      stream.on('money', amount => {
-        console.log(`got money: ${amount} on stream ${stream.id}`);
-      })
+      stream.on('money', f);
     })
   })
 
@@ -87,21 +69,18 @@ async function run () {
     .listen(port)
 
   console.log('listening on ' + port)
-  if (argv.localtunnel) {
-    localtunnel(port, { subdomain: argv.subdomain }, (err, tunnel) => {
-      if (err) {
-        console.error(err)
-        process.exit(1)
-      }
 
-      console.log(chalk.green('public at:', tunnel.url))
-      console.log(chalk.green('payment pointer is:', '$' + argv.subdomain + '.localtunnel.me'))
-    })
-  }
+  localtunnel(port, { subdomain: 'beatblox' }, (err, tunnel) => {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+
+    console.log(chalk.green('public at:', tunnel.url))
+    console.log(chalk.green('payment pointer is:', '$beatblox.localtunnel.me'))
+  })
 }
 
-run()
-  .catch(e => {
-    console.error(e)
-    process.exit(1)
-  })
+exports.run = (f) => {
+  runReceiver(f).catch((err) => console.log("Throttled"));
+}

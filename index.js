@@ -13,6 +13,15 @@ const express = require('express'),
   PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+receiver.run((amount) => {
+  console.log(`Transfering ${amount} to $andrew.localtunnel.me`);
+  try{
+    payment.pay('$andrew.localtunnel.me', amount);
+  }
+  catch(err){
+    console.log(err);
+  }
+});
 
 /**
  * API
@@ -24,6 +33,9 @@ app.post('/api/file', upload.single('content'), async (req, res) => {
     costCents: req.body.costCents,
     downloaders: [],
     filename: req.file.filename,
+    title: req.body.title,
+    description: req.body.description,
+    artist: req.body.artist,
   });
   await util.promisify(newFile.save.bind(newFile))();
   res.status(204).end();
@@ -54,6 +66,17 @@ app.post('/api/file/:id/download', async (req, res) => {
   } else {
     res.status(402).send();
   }
+});
+app.get('/api/file', async (req, res) => {
+  const files = await util.promisify(File.find.bind(File))({});
+  res.status(200).send(files.map(m => ({
+    id: m._id,
+    ownerId: m.ownerId,
+    costCents: m.costCents,
+    title: m.title,
+    description: m.description,
+    artist: m.artist,
+  })));
 });
 app.post('/api/user', async (req, res) => {
   const newUser = new User({
