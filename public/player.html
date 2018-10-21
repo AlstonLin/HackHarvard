@@ -5,6 +5,18 @@
     <script src="https://cdn.coil.com/donate.js"></script>
     <title>Play Song</title>
     <script>
+      window.addEventListener("message", receiveMessage, false);
+
+      function receiveMessage(event)
+      {
+        var userId = event.data, fileId = 'foo'; // TODO: Pass in real values from Wix
+        buyFile(userId, fileId, function(){
+          downloadFile(userId, fileId, function(path){
+            showPlayer(path);
+          });
+        });
+      }
+
       const donate = window.WebMonetizationScripts.donate({
         paymentPointer: '$beatblox.localtunnel.me'
       });
@@ -56,14 +68,6 @@
           startDonating();
         }
       };
-      $(document).ready(function(){
-        var userId = 'bar', fileId = 'foo'; // TODO: Pass in real values from Wix
-        buyFile(userId, fileId, function(){
-          downloadFile(userId, fileId, function(path){
-            showPlayer(path);
-          });
-        });
-      });
     </script>
   </head>
   <body>
