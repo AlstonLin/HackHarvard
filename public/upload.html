@@ -2,6 +2,23 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>Upload Song</title>
+        <script>
+          window.onload = () => {
+            window.parent.postMessage("ready", "*");
+          }
+          window.onmessage = (event) => {
+            if (event.data) {
+              var userId = event.data;
+              $("input[name=ownerId]").val(userId);
+
+              var ele = document.getElementById("#upload-form");
+              ele.addEventListener("submit", (e) => {
+                console.log(e);
+                window.parent.postMessage("done", "*");
+              }, false);
+            }
+          };
+        </script>
         <style>
             .title {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -107,12 +124,12 @@
     <body>
         <div class="wrapper">
             <div class="title">Upload your Song</div>
-            <form action="/api/file" method="post" enctype="multipart/form-data">
+            <form id="upload-form" action="http://40.118.190.177:3000/api/file" method="post" enctype="multipart/form-data">
                 <div class="formLine">
                     <input type="text" id="fileName" class="file_input_textbox" readonly="readonly">
                     <div class="file_input_div">
                         <input id="fileInputButton" type="button" value="Browse" class="file_input_button" />
-                        <input type="file" class="file_input_hidden" 
+                        <input type="file" class="file_input_hidden" name="content" 
                             onchange="document.getElementById('fileName').value = this.value" 
                             onmouseover="document.getElementById('fileInputButton').className = 'file_input_button_hover';" onmouseout="document.getElementById('fileInputButton').className = 'file_input_button';" />
                     </div>

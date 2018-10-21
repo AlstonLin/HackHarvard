@@ -28,7 +28,7 @@ receiver.run((amount) => {
  */
 app.post('/api/file', upload.single('content'), async (req, res) => {
   const newFile = new File({
-    _id: req.body.id,
+    _id: Math.random().toString(36).substring(7),
     ownerId: req.body.ownerId,
     costCents: req.body.costCents,
     downloaders: [],
