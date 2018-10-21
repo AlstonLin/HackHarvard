@@ -5,9 +5,18 @@
     <script src="https://cdn.coil.com/donate.js"></script>
     <title>Play Song</title>
     <script>
-      window.WebMonetizationScripts.donate({
+      const donate = window.WebMonetizationScripts.donate({
         paymentPointer: '$beatblox.localtunnel.me'
-      })
+      });
+      donate.close();
+      var startDonating = () => {
+        window.WebMonetizationScripts.donate({
+          paymentPointer: '$beatblox.localtunnel.me'
+        });
+      }
+      var stopDonating = () => {
+        donate.close();
+      }
       var buyFile = function(userId, fileId, cb){
         $.ajax({
           url: '/api/file/' + fileId + '/buy',
@@ -38,7 +47,14 @@
         });
       };
       var showPlayer = function(path){
-        $('#container').html('<audio controls><source src="' + path + '" type="audio/mpeg"></audio>');
+        $('#container').html('<audio controls id="audio-player"><source src="' + path + '" type="audio/mpeg"></audio>');
+        var audio = document.getElementById("audio-player");
+        audio.onpause = () => {
+          stopDonating();
+        }
+        audio.onplay = () => {
+          startDonating();
+        }
       };
       $(document).ready(function(){
         var userId = 'bar', fileId = 'foo'; // TODO: Pass in real values from Wix
