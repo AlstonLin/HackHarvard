@@ -58,6 +58,7 @@ app.post('/api/file/:id/download', async (req, res) => {
 app.post('/api/user', async (req, res) => {
   const newUser = new User({
     _id: req.body.id,
+    receiverUrl: req.body.receiverUrl,
   });
   await util.promisify(newUser.save.bind(newUser))();
   res.status(204).end();
