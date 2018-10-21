@@ -3,5 +3,8 @@ const mongoose = require('mongoose'),
     _id: {
       type: String,
     },
+    receiverUrl: {
+      type: String,
+    },
   });
 module.exports = mongoose.model('User', schema);
