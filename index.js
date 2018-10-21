@@ -13,6 +13,15 @@ const express = require('express'),
   PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+receiver.run((amount) => {
+  console.log(`Transfering ${amount} to $andrew.localtunnel.me`);
+  try{
+    payment.pay('$andrew.localtunnel.me', amount);
+  }
+  catch(err){
+    console.log(err);
+  }
+});
 
 /**
  * API

@@ -17,9 +17,7 @@ module.exports.pay = async (recipient, amount) => {
     })
   } catch (e) {
     console.error(e)
-    process.exit(1)
   }
 
   console.log('sent!')
-  process.exit(0)
 }
