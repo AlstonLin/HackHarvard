@@ -9,7 +9,8 @@
 
       function receiveMessage(event)
       {
-        var userId = event.data, fileId = 'foo'; // TODO: Pass in real values from Wix
+        var payload = JSON.parse(event.data);
+        var userId = payload.user, fileId = payload.song; // TODO: Pass in real values from Wix
         buyFile(userId, fileId, function(){
           downloadFile(userId, fileId, function(path){
             showPlayer(path);

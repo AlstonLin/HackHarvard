@@ -11,7 +11,7 @@
               var userId = event.data;
               $("input[name=ownerId]").val(userId);
 
-              var ele = document.getElementById("#upload-form");
+              var ele = document.getElementById("upload-form");
               ele.addEventListener("submit", (e) => {
                 console.log(e);
                 window.parent.postMessage("done", "*");
